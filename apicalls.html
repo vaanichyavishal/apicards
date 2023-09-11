@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+        <style>
+            #d1{
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+            #d1 li{
+                width: 150px;
+                height: 200px;
+                list-style: none;
+                border: 1px solid;
+                margin: 10px;
+                text-align: center;
+                border-radius: 10px;
+                box-shadow: 2px 2px;
+                overflow: hidden;
+            }
+            #d1 li img{
+                width: 150px;
+                list-style: none;
+                display: block;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <button onclick="getcountries()">Get Countries</button>
+        
+        <ul id="d1">
+
+        </ul>
+        <script>
+            function getcountries(){
+                $.get("https://restcountries.com/v3.1/all",function(countries,b){
+                    console.log(countries)
+                        countries.forEach(function(country){
+                            var newli=document.createElement("li");
+                            var cn=document.createElement("h5")
+                            cn.innerHTML=country.name.common;
+                            newli.appendChild(cn)
+                            var cp=document.createElement("h6")
+                            cp.innerHTML=country.population
+                            newli.appendChild(cp)
+                            var flg=document.createElement("img")
+                            flg.src=country.flags.svg;
+                            newli.appendChild(flg)
+                            document.getElementById("d1").appendChild(newli)
+                        })
+                })  
+            }
+            
+        </script>
+    </body>
+</html>
